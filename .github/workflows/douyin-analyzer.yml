@@ -7,15 +7,15 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.12"
       - run: pip install requests
       - env:
           DOUBAO_API_KEY: ${{ secrets.DOUBAO_API_KEY }}
         run: python douyin_analyzer.py
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4.1.1
         with:
           name: 分析报告
           path: analysis-report.md
