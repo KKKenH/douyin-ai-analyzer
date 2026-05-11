@@ -1,0 +1,21 @@
+name: 抖音内容AI分析
+
+on:
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - run: pip install requests
+      - env:
+          DOUBAO_API_KEY: ${{ secrets.DOUBAO_API_KEY }}
+        run: python douyin_analyzer.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 分析报告
+          path: analysis-report.md
